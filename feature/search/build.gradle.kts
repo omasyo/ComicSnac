@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "com.keetr.comicsnac.search"
+    namespace = "com.omasyo.comicsnac.search"
 }

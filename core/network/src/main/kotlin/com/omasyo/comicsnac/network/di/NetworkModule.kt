@@ -1,0 +1,150 @@
+package com.omasyo.comicsnac.network.di
+
+import android.content.Context
+import com.omasyo.comicsnac.network.character.CharacterNetworkSource
+import com.omasyo.comicsnac.network.character.DefaultCharacterNetworkSource
+import com.omasyo.comicsnac.network.common.DefaultRandomNetworkSource
+import com.omasyo.comicsnac.network.common.RandomNetworkSource
+import com.omasyo.comicsnac.network.concept.ConceptNetworkSource
+import com.omasyo.comicsnac.network.concept.DefaultConceptNetworkSource
+import com.omasyo.comicsnac.network.createClient
+import com.omasyo.comicsnac.network.episode.DefaultEpisodeNetworkSource
+import com.omasyo.comicsnac.network.episode.EpisodeNetworkSource
+import com.omasyo.comicsnac.network.issue.DefaultIssueNetworkSource
+import com.omasyo.comicsnac.network.issue.IssueNetworkSource
+import com.omasyo.comicsnac.network.location.DefaultLocationNetworkSource
+import com.omasyo.comicsnac.network.location.LocationNetworkSource
+import com.omasyo.comicsnac.network.movie.DefaultMovieNetworkSource
+import com.omasyo.comicsnac.network.movie.MovieNetworkSource
+import com.omasyo.comicsnac.network.`object`.DefaultObjectNetworkSource
+import com.omasyo.comicsnac.network.`object`.ObjectNetworkSource
+import com.omasyo.comicsnac.network.origin.DefaultOriginNetworkSource
+import com.omasyo.comicsnac.network.origin.OriginNetworkSource
+import com.omasyo.comicsnac.network.person.DefaultPersonNetworkSource
+import com.omasyo.comicsnac.network.person.PersonNetworkSource
+import com.omasyo.comicsnac.network.power.DefaultPowerNetworkSource
+import com.omasyo.comicsnac.network.power.PowerNetworkSource
+import com.omasyo.comicsnac.network.publisher.DefaultPublisherNetworkSource
+import com.omasyo.comicsnac.network.publisher.PublisherNetworkSource
+import com.omasyo.comicsnac.network.search.DefaultSearchNetworkSource
+import com.omasyo.comicsnac.network.search.SearchNetworkSource
+import com.omasyo.comicsnac.network.series.DefaultSeriesNetworkSource
+import com.omasyo.comicsnac.network.series.SeriesNetworkSource
+import com.omasyo.comicsnac.network.storyarc.DefaultStoryArcNetworkSource
+import com.omasyo.comicsnac.network.storyarc.StoryArcNetworkSource
+import com.omasyo.comicsnac.network.team.DefaultTeamNetworkSource
+import com.omasyo.comicsnac.network.team.TeamNetworkSource
+import com.omasyo.comicsnac.network.volume.DefaultVolumeNetworkSource
+import com.omasyo.comicsnac.network.volume.VolumeNetworkSource
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.cio.CIO
+import javax.inject.Singleton
+
+
+@Module
+@InstallIn(SingletonComponent::class)
+internal object NetworkModule {
+    @Provides
+    @Singleton
+    fun provideHttpClientEngine(): HttpClientEngine = CIO.create()
+
+    @Provides
+    @Singleton
+    fun provideHttpClient(
+        engine: HttpClientEngine,
+        @ApplicationContext applicationContext: Context
+    ) =
+        createClient(engine, applicationContext)
+
+    @Provides
+    @Singleton
+    fun provideCharacterNetworkSource(client: HttpClient): CharacterNetworkSource =
+        DefaultCharacterNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun provideConceptNetworkSource(client: HttpClient): ConceptNetworkSource =
+        DefaultConceptNetworkSource(client)
+
+
+    @Provides
+    @Singleton
+    fun provideEpisodeNetworkSource(client: HttpClient): EpisodeNetworkSource =
+        DefaultEpisodeNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun provideIssueNetworkSource(client: HttpClient): IssueNetworkSource =
+        DefaultIssueNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun provideLocationNetworkSource(client: HttpClient): LocationNetworkSource =
+        DefaultLocationNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun provideMovieNetworkSource(client: HttpClient): MovieNetworkSource =
+        DefaultMovieNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun provideObjectNetworkSource(client: HttpClient): ObjectNetworkSource =
+        DefaultObjectNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun provideOriginNetworkSource(client: HttpClient): OriginNetworkSource =
+        DefaultOriginNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun providePersonNetworkSource(client: HttpClient): PersonNetworkSource =
+        DefaultPersonNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun providePowerNetworkSource(client: HttpClient): PowerNetworkSource =
+        DefaultPowerNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun providePublisherNetworkSource(client: HttpClient): PublisherNetworkSource =
+        DefaultPublisherNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun provideSearchNetworkSource(client: HttpClient): SearchNetworkSource =
+        DefaultSearchNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun provideSeriesNetworkSource(client: HttpClient): SeriesNetworkSource =
+        DefaultSeriesNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun provideStoryArcNetworkSource(client: HttpClient): StoryArcNetworkSource =
+        DefaultStoryArcNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun provideTeamNetworkSource(client: HttpClient): TeamNetworkSource =
+        DefaultTeamNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun provideVolumeNetworkSource(client: HttpClient): VolumeNetworkSource =
+        DefaultVolumeNetworkSource(client)
+
+    @Provides
+    @Singleton
+    fun provideRandomNetworkSource(client: HttpClient): RandomNetworkSource =
+        DefaultRandomNetworkSource(client)
+}

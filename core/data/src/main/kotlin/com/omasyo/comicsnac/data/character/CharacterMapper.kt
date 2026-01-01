@@ -1,0 +1,56 @@
+package com.omasyo.comicsnac.data.character
+
+import com.omasyo.comicsnac.data.issue.toIssueBasic
+import com.omasyo.comicsnac.data.origin.toOriginBasic
+import com.omasyo.comicsnac.data.person.toBasic
+import com.omasyo.comicsnac.data.power.toBasic
+import com.omasyo.comicsnac.data.publisher.toPublisherBasic
+import com.omasyo.comicsnac.model.character.Character
+import com.omasyo.comicsnac.model.character.CharacterBasic
+import com.omasyo.comicsnac.model.character.CharacterDetails
+import com.omasyo.comicsnac.model.other.Gender
+import com.omasyo.comicsnac.network.character.models.CharacterDetailsApiModel
+import com.omasyo.comicsnac.network.search.models.CharacterListApiModel
+import com.omasyo.comicsnac.network.common.models.CharacterApiModel
+
+internal fun CharacterApiModel.toCharacterBasic() = CharacterBasic(
+    apiDetailUrl = apiDetailUrl, id = id, name = name
+)
+
+internal fun List<CharacterListApiModel>.toCharacters() = map { apiModel -> apiModel.toCharacter() }
+
+fun CharacterListApiModel.toCharacter() =
+    Character(
+        apiDetailUrl = apiDetailUrl,
+        deck = deck ?: "",
+        id = id,
+        imageUrl = image.smallUrl,
+        name = name
+    )
+
+internal fun CharacterDetailsApiModel.toCharacterDetails() =
+    CharacterDetails(
+        id = id,
+        aliases = aliases?.split('\n') ?: emptyList(),
+        apiDetailUrl = apiDetailUrl,
+        countOfIssueAppearances = countOfIssueAppearances,
+        creators = creators.toBasic(),
+        deck = deck ?: "",
+        description = description ?: "",
+        firstAppearance = firstAppearedInIssue.toIssueBasic(),
+        enemiesId = characterEnemies.map { it.id },
+        friendsId = characterFriends.map { it.id },
+        gender = Gender.valueOf(gender.name),
+        imageUrl = image.smallUrl,
+        moviesId = movies.map { it.id },
+        name = name,
+        origin = origin?.toOriginBasic(),
+        powers = powers.toBasic(),
+        publisher = publisher?.toPublisherBasic(),
+        realName = realName ?: "",
+        siteDetailUrl = siteDetailUrl,
+        teamEnemiesId = teamEnemies.map { it.id },
+        teamFriendsId = teamFriends.map { it.id },
+        teamsId = teams.map { it.id },
+        volumeCreditsId = volumeCredits.map { it.id }
+    )

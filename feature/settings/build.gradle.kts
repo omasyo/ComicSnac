@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.keetr.comicsnac.settings"
+    namespace = "com.omasyo.comicsnac.settings"
 }
 
 dependencies {

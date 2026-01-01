@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.keetr.comicsnac.ui"
+    namespace = "com.omasyo.comicsnac.ui"
 }
 
 dependencies {

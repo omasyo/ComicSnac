@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.keetr.comicsnac.baselineprofile"
+    namespace = "com.omasyo.comicsnac.baselineprofile"
     compileSdk = 35
 
     compileOptions {

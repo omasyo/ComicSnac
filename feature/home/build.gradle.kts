@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "com.keetr.comicsnac.home"
+    namespace = "com.omasyo.comicsnac.home"
 }

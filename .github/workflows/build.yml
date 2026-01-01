@@ -40,8 +40,8 @@ jobs:
 
       - name: Create ApiKey file
         run: |
-          printf "package com.keetr.comicsnac.baselineprofile\n\nval ApiKey = \"${{ secrets.API_KEY }}\"" > ./baselineprofile/src/main/java/com/keetr/comicsnac/baselineprofile/ApiKey.kt
-          cd baselineprofile/src/main/java/com/keetr/comicsnac/baselineprofile
+          printf "package com.omasyo.comicsnac.baselineprofile\n\nval ApiKey = \"${{ secrets.API_KEY }}\"" > ./baselineprofile/src/main/java/com/omasyo/comicsnac/baselineprofile/ApiKey.kt
+          cd baselineprofile/src/main/java/com/omasyo/comicsnac/baselineprofile
 
       - name: Run tests
         run: ./gradlew test

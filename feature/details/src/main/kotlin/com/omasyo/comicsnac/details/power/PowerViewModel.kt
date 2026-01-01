@@ -1,0 +1,47 @@
+package com.omasyo.comicsnac.details.power
+
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.omasyo.comicsnac.data.character.CharacterRepository
+import com.omasyo.comicsnac.data.character.getErrorPagingData
+import com.omasyo.comicsnac.data.power.PowerRepository
+import com.omasyo.comicsnac.details.Arg
+import com.omasyo.comicsnac.details.Error
+import com.omasyo.comicsnac.details.Loading
+import com.omasyo.comicsnac.details.RefreshWrapper
+import com.omasyo.comicsnac.details.Success
+import com.omasyo.comicsnac.model.character.Character
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import javax.inject.Inject
+
+@HiltViewModel
+internal class PowerViewModel @Inject constructor(
+    powerRepository: PowerRepository,
+    private val characterRepository: CharacterRepository,
+    savedStateHandle: SavedStateHandle,
+) : ViewModel() {
+
+    private val id = checkNotNull(savedStateHandle.get<String>(Arg))
+
+    val detailsUiState =
+        RefreshWrapper(viewModelScope) { powerRepository.getPowerDetails(id) }.response
+
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val characters: Flow<PagingData<Character>> = detailsUiState.flatMapLatest {
+        when (it) {
+            is Error -> getErrorPagingData<Character>().flow
+            Loading -> emptyFlow()
+            is Success -> {
+                characterRepository.getCharactersWithId(it.content.characterIds)
+            }
+        }
+    }.cachedIn(viewModelScope)
+}

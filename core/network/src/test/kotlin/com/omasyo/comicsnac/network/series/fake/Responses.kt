@@ -1,0 +1,9 @@
+package com.omasyo.comicsnac.network.series.fake
+
+import java.io.File
+
+internal const val root = "src/test/kotlin/com/omasyo/comicsnac/network/series/fake/"
+
+internal val SeriesResponse = File(root, "SeriesResponse.json").readText()
+
+internal val SeriesDetailsResponse = File(root, "SeriesDetailsResponse.json").readText()

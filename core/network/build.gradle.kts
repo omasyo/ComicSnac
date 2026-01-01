@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.keetr.comicsnac.network"
+    namespace = "com.omasyo.comicsnac.network"
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true

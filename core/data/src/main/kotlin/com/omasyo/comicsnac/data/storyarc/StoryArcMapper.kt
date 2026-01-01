@@ -1,0 +1,35 @@
+package com.omasyo.comicsnac.data.storyarc
+
+import com.omasyo.comicsnac.data.episode.toEpisodeBasic
+import com.omasyo.comicsnac.data.issue.toIssueBasic
+import com.omasyo.comicsnac.data.publisher.toPublisherBasic
+import com.omasyo.comicsnac.model.storyarc.StoryArc
+import com.omasyo.comicsnac.model.storyarc.StoryArcDetails
+import com.omasyo.comicsnac.network.search.models.StoryArcListApiModel
+import com.omasyo.comicsnac.network.storyarc.models.StoryArcDetailsApiModel
+
+internal fun List<StoryArcListApiModel>.toStoryArcs() = map { apiModel -> apiModel.toStoryArc() }
+
+internal fun StoryArcListApiModel.toStoryArc() = StoryArc(
+    apiDetailUrl = apiDetailUrl,
+    deck = deck ?: "",
+    id = id,
+    imageUrl = image.smallUrl,
+    name = name
+)
+
+internal fun StoryArcDetailsApiModel.toStoryArcDetails() =
+    StoryArcDetails(
+        apiDetailUrl = apiDetailUrl,
+        deck = deck ?: "",
+        description = description ?: "",
+        episodesId = episodes.map { it.id },
+        firstAppearedInEpisode = firstAppearedInEpisode?.toEpisodeBasic(),
+        firstAppearedInIssue = firstAppearedInIssue.toIssueBasic(),
+        id = id,
+        imageUrl = image.smallUrl,
+        issuesId = issues.map { it.id },
+        name = name,
+        publisher = publisher?.toPublisherBasic(),
+        siteDetailUrl = siteDetailUrl
+    )
