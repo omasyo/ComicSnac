@@ -147,9 +147,10 @@ internal fun HomeScreen(
                         uiState = charactersUiState,
                         onExpand = onCharacterCategoryClicked
                     ) { character ->
-                        ComicCard(modifier = Modifier
-                            .size(136f.dp, 224.dp)
-                            .padding(horizontal = 4f.dp),
+                        ComicCard(
+                            modifier = Modifier
+                                .size(136f.dp, 224.dp)
+                                .padding(horizontal = 4f.dp),
                             name = character.name,
                             imageUrl = character.imageUrl,
                             contentDescription = stringResource(
@@ -168,9 +169,10 @@ internal fun HomeScreen(
                         key = { it.id },
                         onExpand = onVolumeCategoryClicked
                     ) { volume ->
-                        PlainCard(modifier = Modifier
-                            .size(136f.dp, 224.dp)
-                            .padding(horizontal = 4f.dp),
+                        PlainCard(
+                            modifier = Modifier
+                                .size(136f.dp, 224.dp)
+                                .padding(horizontal = 4f.dp),
                             name = volume.name,
                             imageUrl = volume.imageUrl,
                             contentDescription = stringResource(
@@ -189,9 +191,10 @@ internal fun HomeScreen(
                         key = { it.id },
                         onExpand = onMovieCategoryClicked
                     ) { movie ->
-                        PlainCard(modifier = Modifier
-                            .size(136f.dp, 224.dp)
-                            .padding(horizontal = 4f.dp),
+                        PlainCard(
+                            modifier = Modifier
+                                .size(136f.dp, 224.dp)
+                                .padding(horizontal = 4f.dp),
                             name = movie.name,
                             imageUrl = movie.imageUrl,
                             contentDescription = stringResource(
@@ -210,9 +213,10 @@ internal fun HomeScreen(
                         key = { it.id },
                         onExpand = onSeriesCategoryClicked
                     ) { series ->
-                        PlainCard(modifier = Modifier
-                            .size(136f.dp, 224.dp)
-                            .padding(horizontal = 4f.dp),
+                        PlainCard(
+                            modifier = Modifier
+                                .size(136f.dp, 224.dp)
+                                .padding(horizontal = 4f.dp),
                             name = series.name,
                             imageUrl = series.imageUrl,
                             contentDescription = stringResource(
@@ -257,7 +261,8 @@ internal fun HomeScreen(
                                 is Success -> {
                                     PublisherCarousel(
                                         Modifier.testTag("publisher_carousel"),
-                                        publishers = uiState.contents, onIssueClick = onItemClicked
+                                        publishers = uiState.contents,
+                                        onPublisherClick = onItemClicked
                                     )
                                 }
                             }
@@ -317,7 +322,7 @@ private fun Preview() {
             issuesUiState = Success(Issues),
             charactersUiState = Success(Characters),
             volumesUiState = Loading,
-            moviesUiState = Error(RepositoryResponse.TimeoutError, {}),
+            moviesUiState = Error(RepositoryResponse.TimeoutError) {},
             seriesUiState = Loading,
             publishersUiState = Loading
 

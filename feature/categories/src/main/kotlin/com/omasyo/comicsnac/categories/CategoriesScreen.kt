@@ -122,7 +122,7 @@ private fun Category(
     ) {
         Text(stringResource(nameId), style = MaterialTheme.typography.titleMedium)
         Icon(
-            imageVector = AppIcons.RightArrow,
+            painter = AppIcons.RightArrow,
             contentDescription = stringResource(
                 com.omasyo.comicsnac.categories.R.string.expand_category_desc,
                 stringResource(nameId)
@@ -141,21 +141,21 @@ private fun Separator() {
 private fun Preview() {
     ComicSnacTheme {
         CategoriesScreen(
-            onCharactersClicked = { /*TODO*/ },
-            onConceptsClicked = { /*TODO*/ },
-            onEpisodesClicked = { /*TODO*/ },
-            onIssuesClicked = { /*TODO*/ },
-            onLocationsClicked = { /*TODO*/ },
-            onMoviesClicked = { /*TODO*/ },
-            onObjectsClicked = { /*TODO*/ },
-            onOriginsClicked = { /*TODO*/ },
-            onPeopleClicked = { /*TODO*/ },
-            onPowersClicked = { /*TODO*/ },
-            onPublishersClicked = { /*TODO*/ },
-            onSeriesClicked = { /*TODO*/ },
-            onStoryArcsClicked = { /*TODO*/ },
-            onTeamsClicked = { /*TODO*/ },
-            onVolumesClicked = { /*TODO*/ }) {
+            onCharactersClicked = { },
+            onConceptsClicked = { },
+            onEpisodesClicked = { },
+            onIssuesClicked = { },
+            onLocationsClicked = { },
+            onMoviesClicked = { },
+            onObjectsClicked = { },
+            onOriginsClicked = { },
+            onPeopleClicked = { },
+            onPowersClicked = { },
+            onPublishersClicked = { },
+            onSeriesClicked = { },
+            onStoryArcsClicked = { },
+            onTeamsClicked = { },
+            onVolumesClicked = { }) {
 
         }
     }
