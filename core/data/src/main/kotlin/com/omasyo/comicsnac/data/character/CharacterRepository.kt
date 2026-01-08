@@ -12,7 +12,7 @@ interface CharacterRepository {
 
     fun getRecentCharacters(): Flow<RepositoryResponse<List<Character>>>
 
-    fun getAllCharacters(genderFilter: Gender): Flow<PagingData<Character>>
+    fun getAllCharacters(): Flow<PagingData<Character>>
 
     fun getCharactersWithId(charactersId: List<Int>): Flow<PagingData<Character>>
 }

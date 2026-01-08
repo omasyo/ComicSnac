@@ -64,7 +64,7 @@ internal fun EpisodeRoute(
         }
     ) { episode ->
         PlainCard(
-            modifier = Modifier.aspectRatio(4f / 3f),
+            modifier = Modifier.aspectRatio(1f),
             name = episode.name,
             imageUrl = episode.imageUrl,
             contentDescription = stringResource(

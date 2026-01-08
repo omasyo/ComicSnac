@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -55,6 +56,7 @@ fun PlainCard(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(imageUrl).crossfade(true).build(),
             contentDescription = contentDescription, //Add proper string resource
+            placeholder = ColorPainter(Color.Gray),
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
@@ -105,13 +107,13 @@ private fun Preview() {
                 Modifier
                     .fillMaxSize(0.6f)
                     .align(Alignment.Center),
-                backgroundColor = Color.Yellow
+//                backgroundColor = Color.Yellow
             ) {
-//                Box(
-//                    Modifier
-//                        .fillMaxSize()
-//                        .background(Color.Gray)
-//                )
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                        .background(Color.Gray)
+                )
             }
         }
     }

@@ -17,7 +17,7 @@ internal class CharacterViewModel @Inject constructor(
 ) : CategoryViewModel<Character>(settingsRepository) {
 
     override val items =
-        characterRepository.getAllCharacters(Gender.All).cachedIn(viewModelScope)
+        characterRepository.getAllCharacters().cachedIn(viewModelScope)
 
 }
 

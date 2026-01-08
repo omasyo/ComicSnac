@@ -62,7 +62,7 @@ internal fun ConceptRoute(
         }
     ) { concept ->
         ComicCard(
-            modifier = Modifier.aspectRatio(6f / 11f),
+            modifier = Modifier.aspectRatio(0.5f),
             name = concept.name,
             imageUrl = concept.imageUrl,
             contentDescription = stringResource(

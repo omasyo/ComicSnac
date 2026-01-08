@@ -80,7 +80,7 @@ fun SearchApiModel.toSearchModel() = when (this) {
         deck = deck ?: "",
         id = id,
         imageUrl = image.smallUrl,
-        name = ""
+        name = name
     )
 
     is StoryArcListApiModel -> StoryArc(

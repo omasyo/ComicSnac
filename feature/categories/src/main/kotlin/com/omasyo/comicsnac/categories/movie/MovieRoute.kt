@@ -62,7 +62,7 @@ internal fun MovieRoute(
         }
     ) { movie ->
         PlainCard(
-            modifier = Modifier.aspectRatio(6f / 11f),
+            modifier = Modifier.aspectRatio(0.5f),
             name = movie.name,
             imageUrl = movie.imageUrl,
             contentDescription = stringResource(

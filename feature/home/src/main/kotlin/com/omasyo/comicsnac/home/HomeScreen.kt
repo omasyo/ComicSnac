@@ -141,7 +141,7 @@ internal fun HomeScreen(
                 panelSeparator()
 
                 panel {
-                    CategoryCarousel(
+                    CategoryList(
                         name = stringResource(R.string.characters),
                         key = { it.id },
                         uiState = charactersUiState,
@@ -149,8 +149,7 @@ internal fun HomeScreen(
                     ) { character ->
                         ComicCard(
                             modifier = Modifier
-                                .size(136f.dp, 224.dp)
-                                .padding(horizontal = 4f.dp),
+                                .size(128f.dp, 256.dp),
                             name = character.name,
                             imageUrl = character.imageUrl,
                             contentDescription = stringResource(
@@ -163,7 +162,7 @@ internal fun HomeScreen(
                 panelSeparator()
 
                 panel {
-                    CategoryCarousel(
+                    CategoryList(
                         name = stringResource(R.string.popular_volumes),
                         uiState = volumesUiState,
                         key = { it.id },
@@ -171,8 +170,7 @@ internal fun HomeScreen(
                     ) { volume ->
                         PlainCard(
                             modifier = Modifier
-                                .size(136f.dp, 224.dp)
-                                .padding(horizontal = 4f.dp),
+                                .size(128f.dp, 256.dp),
                             name = volume.name,
                             imageUrl = volume.imageUrl,
                             contentDescription = stringResource(
@@ -185,7 +183,7 @@ internal fun HomeScreen(
                 panelSeparator()
 
                 panel {
-                    CategoryCarousel(
+                    CategoryList(
                         name = stringResource(R.string.movies),
                         uiState = moviesUiState,
                         key = { it.id },
@@ -193,8 +191,7 @@ internal fun HomeScreen(
                     ) { movie ->
                         PlainCard(
                             modifier = Modifier
-                                .size(136f.dp, 224.dp)
-                                .padding(horizontal = 4f.dp),
+                                .size(128f.dp, 256.dp),
                             name = movie.name,
                             imageUrl = movie.imageUrl,
                             contentDescription = stringResource(
@@ -207,7 +204,7 @@ internal fun HomeScreen(
                 panelSeparator()
 
                 panel {
-                    CategoryCarousel(
+                    CategoryList(
                         name = stringResource(R.string.series),
                         uiState = seriesUiState,
                         key = { it.id },
@@ -215,8 +212,7 @@ internal fun HomeScreen(
                     ) { series ->
                         PlainCard(
                             modifier = Modifier
-                                .size(136f.dp, 224.dp)
-                                .padding(horizontal = 4f.dp),
+                                .size(128f.dp, 256.dp),
                             name = series.name,
                             imageUrl = series.imageUrl,
                             contentDescription = stringResource(
@@ -294,7 +290,6 @@ internal fun HomeScreen(
                             style = MaterialTheme.typography.headlineSmall,
                             color = MaterialTheme.colorScheme.primaryContainer,
                             modifier = Modifier
-//                                .align(Alignment.CenterEnd)
                                 .clickable { onMoreCategoriesClicked() }
                                 .background(MaterialTheme.colorScheme.onSurface)
                                 .padding(horizontal = 16f.dp, vertical = 4f.dp)

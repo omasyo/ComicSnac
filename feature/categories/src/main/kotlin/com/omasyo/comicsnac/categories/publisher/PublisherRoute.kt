@@ -62,7 +62,7 @@ internal fun PublisherRoute(
         }
     ) { publisher ->
         PlainCard(
-            modifier = Modifier.aspectRatio(6f / 11f),
+            modifier = Modifier.aspectRatio(0.68f),
             name = publisher.name,
             imageUrl = publisher.imageUrl,
             contentDescription = stringResource(

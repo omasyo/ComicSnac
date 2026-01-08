@@ -62,7 +62,7 @@ internal fun ObjectRoute(
         }
     ) { objectItem ->
         ComicCard(
-            modifier = Modifier.aspectRatio(6f / 11f),
+            modifier = Modifier.aspectRatio(0.5f),
             name = objectItem.name,
             imageUrl = objectItem.imageUrl,
             contentDescription = stringResource(

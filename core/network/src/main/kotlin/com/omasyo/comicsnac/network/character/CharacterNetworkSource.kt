@@ -19,7 +19,6 @@ interface CharacterNetworkSource : NetworkSource {
         apiKey: String,
         pageSize: Int,
         offset: Int,
-        gender: GenderApiModel
     ): Result<CharactersListResponse>
 
     suspend fun getCharactersWithId(

@@ -119,7 +119,7 @@ internal fun <T : Any> CategoryScreen(
                                 modifier = Modifier.fillMaxSize(),
                                 contentPadding = PaddingValues(16f.dp),
                                 columns = GridCells.Adaptive(minGridWidth),
-                                horizontalArrangement = Arrangement.spacedBy(16f.dp),
+                                horizontalArrangement = Arrangement.spacedBy(8f.dp),
                                 verticalArrangement = Arrangement.spacedBy(16f.dp),
                                 state = gridState
                             ) {

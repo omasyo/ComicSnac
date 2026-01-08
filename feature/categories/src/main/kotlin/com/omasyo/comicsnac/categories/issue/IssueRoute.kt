@@ -65,7 +65,7 @@ internal fun IssueRoute(
         }
     ) { issue ->
         PlainCard(
-            modifier = Modifier.aspectRatio(6f / 11f),
+            modifier = Modifier.aspectRatio(0.5f),
             name = issue.name,
             imageUrl = issue.imageUrl,
             contentDescription = stringResource(

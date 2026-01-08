@@ -62,7 +62,7 @@ internal fun VolumeRoute(
         }
     ) { volume ->
         PlainCard(
-            modifier = Modifier.aspectRatio(6f / 11f),
+            modifier = Modifier.aspectRatio(0.5f),
             name = volume.name,
             imageUrl = volume.imageUrl,
             contentDescription = stringResource(

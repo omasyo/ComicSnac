@@ -1,5 +1,5 @@
 package com.omasyo.comicsnac.model.other
 
 enum class Gender {
-    All, Male, Female, Other
+    Male, Female, Other
 }

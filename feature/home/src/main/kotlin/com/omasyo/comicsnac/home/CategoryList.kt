@@ -23,7 +23,7 @@ import com.omasyo.comicsnac.ui.components.placeholders.ErrorPlaceholder
 import com.omasyo.comicsnac.ui.components.placeholders.LoadingPlaceholder
 
 @Composable
-internal fun <T> CategoryCarousel(
+internal fun <T> CategoryList(
     modifier: Modifier = Modifier,
     name: String,
     uiState: HomeCategoryUiState<T>,
@@ -76,7 +76,7 @@ internal fun <T> CategoryCarousel(
                     LazyRow(
                         modifier = Modifier.testTag("category_row"),
                         contentPadding = PaddingValues(16f.dp, 8f.dp),
-                        horizontalArrangement = Arrangement.spacedBy(4f.dp)
+                        horizontalArrangement = Arrangement.spacedBy(12f.dp)
                     ) {
                         items(uiState.contents, key = key) {
                             builder(it)

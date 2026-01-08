@@ -62,7 +62,7 @@ internal fun SeriesRoute(
         }
     ) { series ->
         PlainCard(
-            modifier = Modifier.aspectRatio(6f / 11f),
+            modifier = Modifier.aspectRatio(0.5f),
             name = series.name,
             imageUrl = series.imageUrl,
             contentDescription = stringResource(

@@ -62,16 +62,10 @@ class DefaultCharacterNetworkSourceTest : NetworkSourceTest<CharacterNetworkSour
 
     @Test
     fun `check result contains character name`() = runTest {
-        val response = networkSource.getAllCharacters(apiKey, 100, 0, GenderApiModel.All)
+        val response = networkSource.getAllCharacters(apiKey, 100, 0)
         val characters = response.getOrThrow().results
         assert(characters.any { it.name == "Hanazono Hakari" })
         assertEquals(100, characters.size)
-    }
-
-    @Test
-    fun `verify filter characters by gender`() = runTest {
-        val response = networkSource.getAllCharacters(apiKey, 100, 0, GenderApiModel.Male)
-        assert(response.getOrThrow().results.all { it.gender == GenderApiModel.Male })
     }
 
     @Test

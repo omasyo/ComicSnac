@@ -32,16 +32,18 @@ import com.omasyo.comicsnac.ui.theme.ComicSnacTheme
 
 @Composable
 fun WideCard(
-    modifier: Modifier = Modifier,
     name: String,
     description: String,
     onClick: () -> Unit,
     imageUrl: String,
     type: String,
+    modifier: Modifier = Modifier,
     background: Color = MaterialTheme.colorScheme.secondary,
-    imageDescription: String
+    imageDescription: String,
 ) = WideCard(
-    modifier = modifier.fillMaxWidth().height(200f.dp),
+    modifier = modifier
+        .fillMaxWidth()
+        .height(200f.dp),
     name = name,
     onClick = onClick,
     imageUrl = imageUrl,
@@ -55,42 +57,40 @@ fun WideCard(
 
 @Composable
 fun WideCard(
-    modifier: Modifier = Modifier,
     name: String,
     onClick: () -> Unit,
     imageUrl: String,
     imageDescription: String,
     type: String,
     background: Color,
+    modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    Box(
-        modifier
+    Row(
+        modifier = modifier
             .clickable { onClick() }
             .border(4f.dp, MaterialTheme.colorScheme.outline, RectangleShape)
             .background(background)
             .padding(16f.dp)
     ) {
-        Row {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(imageUrl).crossfade(true).build(),
-                contentDescription = imageDescription,
-                contentScale = ContentScale.Fit,
-                modifier = Modifier.aspectRatio(11f / 17f)
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(imageUrl).crossfade(true).build(),
+            contentDescription = imageDescription,
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.aspectRatio(11f / 17f)
+        )
+        Spacer(Modifier.width(8f.dp))
+        Column(Modifier.fillMaxWidth()) {
+            Text(
+                type,
+                Modifier.align(Alignment.End),
+                style = MaterialTheme.typography.labelMedium
             )
-            Spacer(Modifier.width(8f.dp))
-            Column(Modifier.fillMaxWidth()) {
-                Text(
-                    type,
-                    Modifier.align(Alignment.End),
-                    style = MaterialTheme.typography.labelMedium
-                )
-                Spacer(Modifier.height(16f.dp))
-                Text(name, style = MaterialTheme.typography.titleLarge)
-                content()
+            Spacer(Modifier.height(16f.dp))
+            Text(name, style = MaterialTheme.typography.titleLarge)
+            content()
 
-            }
         }
     }
 }

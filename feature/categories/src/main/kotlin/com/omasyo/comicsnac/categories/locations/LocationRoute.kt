@@ -62,7 +62,7 @@ internal fun LocationRoute(
         }
     ) { location ->
         ComicCard(
-            modifier = Modifier.aspectRatio(6f / 11f),
+            modifier = Modifier.aspectRatio(0.5f),
             name = location.name,
             imageUrl = location.imageUrl,
             contentDescription = stringResource(

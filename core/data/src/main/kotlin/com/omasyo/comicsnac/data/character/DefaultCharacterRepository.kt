@@ -44,7 +44,7 @@ internal class DefaultCharacterRepository @Inject constructor(
                 }
         }.flowOn(dispatcher)
 
-    override fun getAllCharacters(genderFilter: Gender): Flow<PagingData<Character>> =
+    override fun getAllCharacters(): Flow<PagingData<Character>> =
         authRepository.getApiKey().flatMapLatest { apiKey ->
             Pager(
                 config = pagingConfig,
@@ -55,7 +55,6 @@ internal class DefaultCharacterRepository @Inject constructor(
                             apiKey,
                             PageSize,
                             PageSize * page,
-                            GenderApiModel.valueOf(genderFilter.name)
                         ).getOrThrow().results
                     },
                     mapper = List<CharacterListApiModel>::toCharacters

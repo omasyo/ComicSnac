@@ -32,9 +32,9 @@ internal class DefaultCharacterNetworkSource @Inject constructor(
 
 
     override suspend fun getAllCharacters(
-        apiKey: String, pageSize: Int, offset: Int, gender: GenderApiModel
+        apiKey: String, pageSize: Int, offset: Int,
     ): Result<CharactersListResponse> =
-        getCharacters(apiKey, pageSize, offset, gender, sortRecentlyUpdated = Sort.Descending)
+        getCharacters(apiKey, pageSize, offset, sortRecentlyUpdated = Sort.Descending)
 
     override suspend fun getCharactersWithId(
         apiKey: String, pageSize: Int, offset: Int, characterIds: List<Int>
@@ -45,7 +45,6 @@ internal class DefaultCharacterNetworkSource @Inject constructor(
         apiKey: String,
         pageSize: Int,
         offset: Int,
-        gender: GenderApiModel = GenderApiModel.All,
         charactersId: List<Int> = emptyList(),
         sortRecentlyUpdated: Sort = Sort.None
     ): Result<CharactersListResponse> = makeRequest {
@@ -54,7 +53,6 @@ internal class DefaultCharacterNetworkSource @Inject constructor(
             parameter("field_list", ListFieldList)
             parameter("limit", pageSize)
             parameter("offset", offset)
-            if (gender != GenderApiModel.All) parameter("gender", gender.id)
             if (charactersId.isNotEmpty()) parameter(
                 "filter", "id:${charactersId.joinToString("|")}"
             )
