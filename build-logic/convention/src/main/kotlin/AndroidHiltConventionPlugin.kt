@@ -16,6 +16,8 @@ class AndroidHiltConventionPlugin : Plugin<Project> {
             dependencies {
                 "implementation"(libs.findLibrary("hilt.android").get())
                 "ksp"(libs.findLibrary("hilt.compiler").get())
+
+                "ksp"("org.jetbrains.kotlin:kotlin-metadata-jvm:2.3.0") //TODO https://github.com/google/dagger/issues/5001
             }
         }
     }

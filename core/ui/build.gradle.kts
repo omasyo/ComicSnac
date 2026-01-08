@@ -1,6 +1,6 @@
 plugins {
     id("comicsnac.android.library")
-    id("comicsnac.android.compose")
+    id("comicsnac.android.compose.library")
 }
 
 android {

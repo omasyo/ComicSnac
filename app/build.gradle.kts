@@ -1,27 +1,16 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    id("comicsnac.android.hilt")
     alias(libs.plugins.androidx.baselineprofile)
-    alias(libs.plugins.ksp)
+    id("comicsnac.android.application")
 }
 
 android {
     namespace = "com.omasyo.comicsnac"
-    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.omasyo.comicsnac"
-        minSdk = 24
-        targetSdk = 35
+
         versionCode = 6
         versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildTypes {
@@ -34,18 +23,7 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
 
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-    buildFeatures {
-        compose = true
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"

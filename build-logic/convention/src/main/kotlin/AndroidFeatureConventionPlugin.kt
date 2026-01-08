@@ -11,7 +11,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
         with(target) {
             pluginManager.apply {
                 apply("comicsnac.android.library")
-                apply("comicsnac.android.compose")
+                apply("comicsnac.android.compose.library")
                 apply("comicsnac.android.hilt")
             }
 

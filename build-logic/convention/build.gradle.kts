@@ -14,6 +14,10 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        register("androidApplication") {
+            id = "comicsnac.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
         register("androidFeature") {
             id = "comicsnac.android.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
@@ -22,9 +26,13 @@ gradlePlugin {
             id = "comicsnac.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
-        register("androidCompose") {
-            id = "comicsnac.android.compose"
-            implementationClass = "AndroidComposeConventionPlugin"
+        register("androidComposeApplication") {
+            id = "comicsnac.android.compose.application"
+            implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
+        register("androidComposeLibrary") {
+            id = "comicsnac.android.compose.library"
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("androidHilt") {
             id = "comicsnac.android.hilt"
