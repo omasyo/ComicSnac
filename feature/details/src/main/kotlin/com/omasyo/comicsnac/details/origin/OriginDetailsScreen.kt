@@ -84,8 +84,7 @@ internal fun OriginDetailsScreen(
 
             AnimatedContent(
                 targetState = detailsUiState, label = "origin_details_header",
-                modifier =
-                Modifier
+                modifier = Modifier
                     .background(MaterialTheme.colorScheme.secondary)
                     .fillMaxWidth()
                     .padding(horizontal = 16f.dp, vertical = 8f.dp),

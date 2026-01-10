@@ -28,11 +28,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.text.HtmlCompat
 import androidx.core.text.getSpans
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.omasyo.comicsnac.ui.theme.ComicSnacTheme
 import java.util.ArrayDeque
 
 const val TAG = "SComicWebView"
@@ -137,7 +139,7 @@ fun rememberComicWebViewContent(
     baseUrl: String,
     onLinkClick: (String) -> Unit = {},
 ): ComicWebViewContent {
-    val body = MaterialTheme.typography.bodyLarge.copy(MaterialTheme.colorScheme.tertiary)
+    val body = MaterialTheme.typography.bodyLarge.copy(MaterialTheme.colorScheme.primary)
     val title = MaterialTheme.typography.titleLarge.copy(MaterialTheme.colorScheme.tertiary)
     val headline = MaterialTheme.typography.headlineSmall.copy(MaterialTheme.colorScheme.tertiary)
     val link = MaterialTheme.typography.bodyLarge.copy(MaterialTheme.colorScheme.secondary)
@@ -248,4 +250,15 @@ fun Spanned.toAnnotatedString(
         }
     }
     return ComicWebViewContent(text = string, images = list)
+}
+
+@Preview
+@Composable
+private fun Preview() {
+    ComicSnacTheme {
+        ComicWebView(
+            content = rememberComicWebViewContent(SampleHtmlText, ""){}
+        )
+
+    }
 }

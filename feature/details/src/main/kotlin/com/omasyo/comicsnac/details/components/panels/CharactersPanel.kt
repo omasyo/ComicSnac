@@ -57,7 +57,8 @@ internal fun PanelLazyListScope.charactersPanel(
                 onToggleExpand(index)
             },
             key = { it.id }) { character ->
-            ComicCard(modifier = Modifier.width(136f.dp),
+            ComicCard(
+                modifier = Modifier.width(136f.dp),
                 name = character.name,
                 imageUrl = character.imageUrl,
                 contentDescription = stringResource(

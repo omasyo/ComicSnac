@@ -1,17 +1,14 @@
 package com.omasyo.comicsnac.details.concept
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -63,39 +60,10 @@ internal fun ConceptDetailsScreen(
         is Success -> {
             val scope = rememberCoroutineScope()
 
-            var imageExpanded by rememberSaveable {
-                mutableStateOf(false)
-            }
-
-
-            val state = rememberLazyListState()
-            var expandedIndex by rememberSaveable {
-                mutableIntStateOf(-1)
-            }
-            val canScroll = expandedIndex < 0 && !imageExpanded
+            var expandedIndex by rememberSaveable { mutableIntStateOf(-1) }
 
             fun expandedProviderCallback(index: Int) = index == expandedIndex
 
-
-            fun onExpand(index: Int) {
-                scope.launch {
-                    if (expandedIndex == index) {
-                        expandedIndex = -1
-                        state.animateScrollAndAlignItem(
-                            index, 0.33f
-                        )
-                    } else {
-                        expandedIndex = index
-                        state.animateScrollAndAlignItem(
-                            index
-                        )
-                    }
-                }
-            }
-
-            BackHandler(!canScroll) {
-                imageExpanded = false
-            }
 
             with(detailsUiState.content) {
 
@@ -109,19 +77,28 @@ internal fun ConceptDetailsScreen(
                             imageUrl, stringResource(CommonString.character_image_desc)
                         ),
                     ),
-                    lazyListState = state,
-                    userScrollEnabled = canScroll,
+                    userScrollEnabled = expandedIndex < 0,
                     onBackPressed = onBackPressed,
-                    onImageClose = { imageExpanded = false },
-                    imageExpanded = imageExpanded,
-                    onImageClicked = {
-                        scope.launch {
-                            imageExpanded = true
-                            state.scrollToItem(0)
-                        }
-                    },
                     onShareClick = { shareUrl(context, siteDetailUrl) }
-                ) {
+                ) { lazyListState ->
+
+                    fun onExpand(index: Int) {
+                        scope.launch {
+                            if (expandedIndex == index) {
+                                expandedIndex = -1
+                                lazyListState.animateScrollAndAlignItem(
+                                    index, 0.33f
+                                )
+                            } else {
+                                expandedIndex = index
+                                lazyListState.animateScrollAndAlignItem(
+                                    index
+                                )
+                            }
+                        }
+                    }
+
+
                     panel {
                         Column(
                             Modifier

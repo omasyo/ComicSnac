@@ -2,6 +2,7 @@ package com.omasyo.comicsnac.details.components
 
 import android.content.Context
 import android.content.Intent
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.scaleIn
@@ -13,8 +14,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -26,6 +29,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,6 +46,7 @@ import com.omasyo.comicsnac.ui.components.lazylist.PanelLazyListScope
 import com.omasyo.comicsnac.ui.components.lazylist.PanelList
 import com.omasyo.comicsnac.ui.theme.AppIcons
 import com.omasyo.comicsnac.ui.theme.ComicSnacTheme
+import kotlinx.coroutines.launch
 import com.omasyo.comicsnac.ui.R.string as CommonString
 
 
@@ -50,13 +56,17 @@ internal fun DetailsScreen(
     images: List<Image>,
     onBackPressed: () -> Unit,
     userScrollEnabled: Boolean = true,
-    imageExpanded: Boolean,
-    onImageClicked: () -> Unit,
-    onImageClose: () -> Unit,
     onShareClick: () -> Unit,
-    lazyListState: LazyListState = rememberLazyListState(),
-    content: PanelLazyListScope.() -> Unit
+    content: PanelLazyListScope.(LazyListState) -> Unit
 ) {
+    val scope = rememberCoroutineScope()
+    val lazyListState = rememberLazyListState()
+    var imageExpanded by rememberSaveable { mutableStateOf(false) }
+
+    BackHandler(imageExpanded) {
+        imageExpanded = false
+    }
+
     Scaffold(
         modifier,
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -82,17 +92,27 @@ internal fun DetailsScreen(
                         images = images,
                         lazyListState = lazyListState,
                         imageExpanded = imageExpanded,
-                        onImageClicked = onImageClicked,
+                        onImageClicked = {
+                            scope.launch {
+                                imageExpanded = true
+                                lazyListState.scrollToItem(0)
+                            }
+                        },
                     )
 
-                    Box(Modifier
-                        .padding(16f.dp)
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.primary)
-                        .clickable {
-                            if (imageExpanded) onImageClose() else onBackPressed()
-                        }
-                        .size(56f.dp), contentAlignment = Alignment.Center) {
+                    Box(
+                        modifier = Modifier
+                            .padding(16f.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.primary)
+                            .clickable {
+                                if (imageExpanded) {
+                                    imageExpanded = false
+                                } else {
+                                    onBackPressed()
+                                }
+                            }
+                            .size(56f.dp), contentAlignment = Alignment.Center) {
                         AnimatedContent(
                             targetState = imageExpanded, transitionSpec = {
                                 scaleIn() togetherWith scaleOut()
@@ -145,7 +165,7 @@ internal fun DetailsScreen(
                         flipped = flipped
                     )
                 }
-                content()
+                content(lazyListState)
             }
         }
     }
@@ -171,7 +191,8 @@ internal fun Info(
 ) {
     Row(Modifier.fillMaxWidth()) {
         Text("$name: ", style = MaterialTheme.typography.titleLarge)
-        Text(content,
+        Text(
+            content,
             style = MaterialTheme.typography.titleLarge,
             textDecoration = textDecoration,
             modifier = Modifier.clickable(onItemClicked != null) { onItemClicked?.invoke() })
@@ -200,9 +221,6 @@ private fun Preview() {
         }
         DetailsScreen(
             images = List(5) { Image(it.toString(), null) },
-            imageExpanded = expanded,
-            onImageClicked = { expanded = true },
-            onImageClose = { expanded = false },
             onBackPressed = { expanded = false },
             onShareClick = {}
         ) {
