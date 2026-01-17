@@ -143,11 +143,13 @@ internal fun StoryArcDetailsScreen(
                             ::expandedProviderCallback,
                             ::onExpand,
                         )
-                    } else if (issuesId.isNotEmpty()) {
-                        panelSeparator()
                     }
 
                     if (issuesId.isNotEmpty()) {
+                        if (description.isBlank()) {
+                            panelSeparator()
+                        }
+
                         issuesPanel(
                             issues,
                             ::expandedProviderCallback,
@@ -157,7 +159,7 @@ internal fun StoryArcDetailsScreen(
                     }
 
                     if (episodesId.isNotEmpty()) {
-                        if (issuesId.isNotEmpty()) {
+                        if (description.isBlank() || issuesId.isNotEmpty()) {
                             panelSeparator()
                         }
 

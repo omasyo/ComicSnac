@@ -147,11 +147,13 @@ internal fun VolumeDetailsScreen(
                             ::expandedProviderCallback,
                             ::onExpand,
                         )
-                    } else if (issuesId.isNotEmpty()) {
-                        panelSeparator()
                     }
 
                     if (issuesId.isNotEmpty()) {
+                        if (description.isBlank()) {
+                            panelSeparator()
+                        }
+
                         issuesPanel(
                             issues,
                             ::expandedProviderCallback,

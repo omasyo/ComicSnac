@@ -164,11 +164,13 @@ internal fun EpisodeDetailsScreen(
                             ::expandedProviderCallback,
                             ::onExpand,
                         )
-                    } else if (locationsId.isNotEmpty()) {
-                        panelSeparator()
                     }
 
                     if (locationsId.isNotEmpty()) {
+                        if (description.isBlank()) {
+                            panelSeparator()
+                        }
+
                         locationsPanel(
                             locations,
                             ::expandedProviderCallback,
@@ -178,7 +180,7 @@ internal fun EpisodeDetailsScreen(
                     }
 
                     if (objectsId.isNotEmpty()) {
-                        if (locationsId.isNotEmpty()) {
+                        if (description.isBlank() || locationsId.isNotEmpty()) {
                             panelSeparator()
                         }
 

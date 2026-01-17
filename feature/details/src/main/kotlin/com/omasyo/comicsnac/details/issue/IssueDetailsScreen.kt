@@ -215,11 +215,13 @@ internal fun IssueDetailsScreen(
                             ::expandedProviderCallback,
                             ::onExpand,
                         )
-                    } else if (concepts.isNotEmpty()) {
-                        panelSeparator()
                     }
 
                     if (concepts.isNotEmpty()) {
+                        if (description.isBlank()) {
+                            panelSeparator()
+                        }
+
                         panel {
                             DetailsFlow(
                                 name = stringResource(CommonString.concepts), items = concepts
@@ -235,7 +237,7 @@ internal fun IssueDetailsScreen(
                     }
 
                     if (locationsId.isNotEmpty()) {
-                        if (concepts.isNotEmpty()) {
+                        if (description.isBlank() || concepts.isNotEmpty()) {
                             panelSeparator()
                         }
 
@@ -248,7 +250,7 @@ internal fun IssueDetailsScreen(
                     }
 
                     if (objectsId.isNotEmpty()) {
-                        if (concepts.isNotEmpty() || locationsId.isNotEmpty()) {
+                        if (description.isBlank() || concepts.isNotEmpty() || locationsId.isNotEmpty()) {
                             panelSeparator()
                         }
 
@@ -261,7 +263,7 @@ internal fun IssueDetailsScreen(
                     }
 
                     if (storyArcsId.isNotEmpty()) {
-                        if (concepts.isNotEmpty() || locationsId.isNotEmpty() || objectsId.isNotEmpty()) {
+                        if (description.isBlank() || concepts.isNotEmpty() || locationsId.isNotEmpty() || objectsId.isNotEmpty()) {
                             panelSeparator()
                         }
 

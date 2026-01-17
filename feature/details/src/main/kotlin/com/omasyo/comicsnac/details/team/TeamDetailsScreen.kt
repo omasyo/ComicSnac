@@ -188,11 +188,13 @@ internal fun TeamDetailsScreen(
                             ::expandedProviderCallback,
                             ::onExpand,
                         )
-                    } else if (volumeCreditsId.isNotEmpty()) {
-                        panelSeparator()
                     }
 
                     if (volumeCreditsId.isNotEmpty()) {
+                        if (description.isBlank()) {
+                            panelSeparator()
+                        }
+
                         volumesPanel(
                             volumes,
                             ::expandedProviderCallback,
@@ -202,7 +204,7 @@ internal fun TeamDetailsScreen(
                     }
 
                     if (moviesId.isNotEmpty()) {
-                        if (volumeCreditsId.isNotEmpty()) {
+                        if (description.isBlank() || volumeCreditsId.isNotEmpty()) {
                             panelSeparator()
                         }
 

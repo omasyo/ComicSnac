@@ -203,11 +203,13 @@ internal fun MovieDetailsScreen(
                             ::expandedProviderCallback,
                             ::onExpand,
                         )
-                    } else if (objectsId.isNotEmpty()) {
-                        panelSeparator()
                     }
 
                     if (objectsId.isNotEmpty()) {
+                        if (description.isBlank()) {
+                            panelSeparator()
+                        }
+
                         objectsPanel(
                             objects,
                             ::expandedProviderCallback,
@@ -217,7 +219,7 @@ internal fun MovieDetailsScreen(
                     }
 
                     if (locationsId.isNotEmpty()) {
-                        if (objectsId.isNotEmpty()) {
+                        if (description.isBlank() || objectsId.isNotEmpty()) {
                             panelSeparator()
                         }
 
@@ -230,7 +232,7 @@ internal fun MovieDetailsScreen(
                     }
 
                     if (writers.isNotEmpty()) {
-                        if (objectsId.isNotEmpty() || locationsId.isNotEmpty()) {
+                        if (description.isBlank() || objectsId.isNotEmpty() || locationsId.isNotEmpty()) {
                             panelSeparator()
                         }
 
@@ -249,7 +251,7 @@ internal fun MovieDetailsScreen(
                     }
 
                     if (producers.isNotEmpty()) {
-                        if (objectsId.isNotEmpty() || locationsId.isNotEmpty()) {
+                        if (description.isBlank() || objectsId.isNotEmpty() || locationsId.isNotEmpty() || writers.isNotEmpty()) {
                             panelSeparator()
                         }
 

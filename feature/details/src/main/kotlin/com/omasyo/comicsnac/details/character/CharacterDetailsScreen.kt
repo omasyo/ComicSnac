@@ -243,11 +243,13 @@ internal fun CharacterDetailsScreen(
                             ::expandedProviderCallback,
                             ::onExpand,
                         )
-                    } else if (volumeCreditsId.isNotEmpty()) {
-                        panelSeparator()
                     }
 
                     if (volumeCreditsId.isNotEmpty()) {
+                        if (description.isBlank()) {
+                            panelSeparator()
+                        }
+
                         volumesPanel(
                             volumes,
                             ::expandedProviderCallback,
@@ -257,7 +259,7 @@ internal fun CharacterDetailsScreen(
                     }
 
                     if (moviesId.isNotEmpty()) {
-                        if (volumeCreditsId.isNotEmpty()) {
+                        if (description.isBlank() || volumeCreditsId.isNotEmpty()) {
                             panelSeparator()
                         }
 
@@ -270,7 +272,7 @@ internal fun CharacterDetailsScreen(
                     }
 
                     if (creators.isNotEmpty()) {
-                        if (volumeCreditsId.isNotEmpty() || moviesId.isNotEmpty()) {
+                        if (description.isBlank() || volumeCreditsId.isNotEmpty() || moviesId.isNotEmpty()) {
                             panelSeparator()
                         }
 
