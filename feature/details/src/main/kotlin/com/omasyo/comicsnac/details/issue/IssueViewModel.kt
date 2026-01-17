@@ -7,6 +7,9 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.omasyo.comicsnac.data.character.CharacterRepository
 import com.omasyo.comicsnac.data.issue.IssueRepository
+import com.omasyo.comicsnac.data.location.LocationRepository
+import com.omasyo.comicsnac.data.`object`.ObjectRepository
+import com.omasyo.comicsnac.data.storyarc.StoryArcRepository
 import com.omasyo.comicsnac.data.team.TeamRepository
 import com.omasyo.comicsnac.details.Arg
 import com.omasyo.comicsnac.details.Error
@@ -30,6 +33,9 @@ import javax.inject.Inject
 internal class IssueViewModel @Inject constructor(
     issueRepository: IssueRepository,
     private val characterRepository: CharacterRepository,
+    private val locationRepository: LocationRepository,
+    private val objectRepository: ObjectRepository,
+    private val storyArcRepository: StoryArcRepository,
     private val teamRepository: TeamRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
@@ -45,15 +51,15 @@ internal class IssueViewModel @Inject constructor(
     }
 
     val locations: Flow<PagingData<Location>> = getPagingData {
-        emptyFlow()
+        locationRepository.getLocationsWithId(locationsId)
     }
 
     val objects: Flow<PagingData<ObjectItem>> = getPagingData {
-        emptyFlow()
+        objectRepository.getObjectsWithId(objectsId)
     }
 
     val storyArcs: Flow<PagingData<StoryArc>> = getPagingData {
-        emptyFlow()
+        storyArcRepository.getStoryArcsWithId(storyArcsId)
     }
 
     val teams: Flow<PagingData<Team>> = getPagingData {

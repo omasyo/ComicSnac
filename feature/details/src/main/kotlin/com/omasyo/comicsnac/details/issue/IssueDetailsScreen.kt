@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import com.omasyo.comicsnac.details.DetailsUiState
@@ -128,6 +129,7 @@ internal fun IssueDetailsScreen(
                             Text(
                                 "${volume.name} #$issueNumber",
                                 style = MaterialTheme.typography.headlineMedium,
+                                textDecoration = TextDecoration.Underline,
                                 modifier = Modifier.clickable { onItemClicked(volume.apiDetailUrl) }
                             )
                             Text(name, style = MaterialTheme.typography.headlineSmall)
@@ -218,7 +220,6 @@ internal fun IssueDetailsScreen(
                     }
 
                     if (concepts.isNotEmpty()) {
-
                         panel {
                             DetailsFlow(
                                 name = stringResource(CommonString.concepts), items = concepts
@@ -231,11 +232,12 @@ internal fun IssueDetailsScreen(
                                     style = MaterialTheme.typography.titleMedium)
                             }
                         }
-
-                        panelSeparator()
                     }
 
                     if (locationsId.isNotEmpty()) {
+                        if (concepts.isNotEmpty()) {
+                            panelSeparator()
+                        }
 
                         locationsPanel(
                             locations,
@@ -243,11 +245,12 @@ internal fun IssueDetailsScreen(
                             ::onExpand,
                             onItemClicked
                         )
-
-                        panelSeparator()
                     }
 
                     if (objectsId.isNotEmpty()) {
+                        if (concepts.isNotEmpty() || locationsId.isNotEmpty()) {
+                            panelSeparator()
+                        }
 
                         objectsPanel(
                             objects,
@@ -255,11 +258,12 @@ internal fun IssueDetailsScreen(
                             ::onExpand,
                             onItemClicked
                         )
-
-                        panelSeparator()
                     }
 
                     if (storyArcsId.isNotEmpty()) {
+                        if (concepts.isNotEmpty() || locationsId.isNotEmpty() || objectsId.isNotEmpty()) {
+                            panelSeparator()
+                        }
 
                         storyArcsPanel(
                             storyArcs,
@@ -267,8 +271,6 @@ internal fun IssueDetailsScreen(
                             ::onExpand,
                             onItemClicked
                         )
-
-                        panelSeparator()
                     }
                 }
             }

@@ -257,7 +257,9 @@ internal fun CharacterDetailsScreen(
                     }
 
                     if (moviesId.isNotEmpty()) {
-                        panelSeparator()
+                        if (volumeCreditsId.isNotEmpty()) {
+                            panelSeparator()
+                        }
 
                         moviesPanel(
                             movies,
@@ -268,7 +270,9 @@ internal fun CharacterDetailsScreen(
                     }
 
                     if (creators.isNotEmpty()) {
-                        panelSeparator()
+                        if (volumeCreditsId.isNotEmpty() || moviesId.isNotEmpty()) {
+                            panelSeparator()
+                        }
 
                         panel {
                             DetailsFlow(

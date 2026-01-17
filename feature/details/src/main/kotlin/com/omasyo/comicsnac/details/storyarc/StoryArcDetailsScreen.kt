@@ -154,11 +154,13 @@ internal fun StoryArcDetailsScreen(
                             ::onExpand,
                             onItemClicked
                         )
-
-                        panelSeparator()
                     }
 
                     if (episodesId.isNotEmpty()) {
+                        if (issuesId.isNotEmpty()) {
+                            panelSeparator()
+                        }
+
                         episodesPanel(
                             episodes,
                             ::expandedProviderCallback,

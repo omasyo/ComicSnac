@@ -178,7 +178,9 @@ internal fun EpisodeDetailsScreen(
                     }
 
                     if (objectsId.isNotEmpty()) {
-                        panelSeparator()
+                        if (locationsId.isNotEmpty()) {
+                            panelSeparator()
+                        }
 
                         objectsPanel(
                             objects,

@@ -14,10 +14,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -186,7 +184,6 @@ internal fun shareUrl(context: Context, url: String) {
 internal fun Info(
     name: String,
     content: String,
-    textDecoration: TextDecoration? = null,
     onItemClicked: (() -> Unit)? = null
 ) {
     Row(Modifier.fillMaxWidth()) {
@@ -194,7 +191,7 @@ internal fun Info(
         Text(
             content,
             style = MaterialTheme.typography.titleLarge,
-            textDecoration = textDecoration,
+            textDecoration = if (onItemClicked != null) TextDecoration.Underline else TextDecoration.None,
             modifier = Modifier.clickable(onItemClicked != null) { onItemClicked?.invoke() })
     }
 }

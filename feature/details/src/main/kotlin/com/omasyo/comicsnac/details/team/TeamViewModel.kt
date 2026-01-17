@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.omasyo.comicsnac.data.character.CharacterRepository
+import com.omasyo.comicsnac.data.movie.MovieRepository
 import com.omasyo.comicsnac.data.team.TeamRepository
 import com.omasyo.comicsnac.data.volume.VolumeRepository
 import com.omasyo.comicsnac.details.Arg
@@ -26,8 +27,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class TeamViewModel @Inject constructor(
-    private val characterRepository: CharacterRepository,
     teamRepository: TeamRepository,
+    private val characterRepository: CharacterRepository,
+    private val movieRepository: MovieRepository,
     private val volumeRepository: VolumeRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
@@ -51,7 +53,7 @@ internal class TeamViewModel @Inject constructor(
     }
 
     val movies: Flow<PagingData<Movie>> = getPagingData {
-        emptyFlow()
+        movieRepository.getMoviesWithId(moviesId)
     }
 
     val volumes: Flow<PagingData<Volume>> = getPagingData {

@@ -214,22 +214,26 @@ internal fun MovieDetailsScreen(
                             ::onExpand,
                             onItemClicked
                         )
-
-                        panelSeparator()
                     }
 
                     if (locationsId.isNotEmpty()) {
+                        if (objectsId.isNotEmpty()) {
+                            panelSeparator()
+                        }
+
                         locationsPanel(
                             locations,
                             ::expandedProviderCallback,
                             ::onExpand,
                             onItemClicked
                         )
-
-                        panelSeparator()
                     }
 
                     if (writers.isNotEmpty()) {
+                        if (objectsId.isNotEmpty() || locationsId.isNotEmpty()) {
+                            panelSeparator()
+                        }
+
                         panel {
                             DetailsFlow(
                                 name = stringResource(R.string.writers), items = writers
@@ -242,11 +246,13 @@ internal fun MovieDetailsScreen(
                                     style = MaterialTheme.typography.titleLarge)
                             }
                         }
-
-                        panelSeparator()
                     }
 
                     if (producers.isNotEmpty()) {
+                        if (objectsId.isNotEmpty() || locationsId.isNotEmpty()) {
+                            panelSeparator()
+                        }
+
                         panel {
                             DetailsFlow(
                                 name = stringResource(R.string.producers), items = producers

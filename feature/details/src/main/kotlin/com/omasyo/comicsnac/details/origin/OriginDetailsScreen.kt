@@ -149,7 +149,7 @@ internal fun OriginDetailsScreen(
                             items(characters.itemCount) {
                                 with(characters[it]!!) {
                                     ComicCard(
-                                        modifier = Modifier.aspectRatio(6f / 11f),
+                                        modifier = Modifier.aspectRatio(0.5f),
                                         name = name,
                                         imageUrl = imageUrl,
                                         contentDescription = stringResource(

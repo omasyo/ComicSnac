@@ -15,7 +15,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import com.omasyo.comicsnac.details.DetailsUiState
@@ -148,7 +147,6 @@ internal fun PersonDetailsScreen(
                                 val colorScheme = MaterialTheme.colorScheme
                                 Info(
                                     name = stringResource(R.string.website),
-                                    textDecoration = TextDecoration.Underline,
                                     content = website
                                 ) {
                                     openUrl(context, website, colorScheme)

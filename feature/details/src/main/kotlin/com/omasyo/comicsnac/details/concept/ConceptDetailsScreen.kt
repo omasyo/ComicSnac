@@ -138,6 +138,8 @@ internal fun ConceptDetailsScreen(
                     }
 
                     if (volumesId.isNotEmpty()) {
+                        panelSeparator()
+
                         volumesPanel(
                             volumes,
                             ::expandedProviderCallback,

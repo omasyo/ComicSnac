@@ -202,7 +202,9 @@ internal fun TeamDetailsScreen(
                     }
 
                     if (moviesId.isNotEmpty()) {
-                        panelSeparator()
+                        if (volumeCreditsId.isNotEmpty()) {
+                            panelSeparator()
+                        }
 
                         moviesPanel(
                             movies,
