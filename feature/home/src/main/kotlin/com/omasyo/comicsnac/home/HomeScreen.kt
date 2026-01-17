@@ -24,6 +24,9 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -59,7 +62,22 @@ internal fun HomeScreen(
     seriesUiState: SeriesUiState,
     publishersUiState: PublishersUiState
 ) {
-    Scaffold(modifier) { padding ->
+    val upperColor = MaterialTheme.colorScheme.primary
+    val lowerColor = MaterialTheme.colorScheme.tertiary
+    Scaffold(
+        containerColor = Color.Transparent,
+        modifier = modifier.drawBehind {
+            drawRect(
+                color = upperColor,
+                size = size.copy(height = size.height / 2)
+            )
+            drawRect(
+                color = lowerColor,
+                topLeft = Offset(0f, size.height / 2),
+                size = size.copy(height = size.height / 2)
+            )
+        }
+    ) { padding ->
         CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurface) {
             PanelList(
                 modifier = Modifier.testTag("home_list"),

@@ -11,11 +11,14 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -70,22 +73,22 @@ internal fun DetailsScreen(
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
         contentColor = MaterialTheme.colorScheme.onSurface
     ) { paddingValues ->
-        Box {
-            val panelColors = with(MaterialTheme.colorScheme) {
-                PanelColors(
-                    strokeColor = outline,
-                    surface1 = secondary,
-                    surface2 = primary,
-                    surface3 = tertiary
-                )
-            }
-            PanelList(
-                contentPadding = paddingValues,
-                state = lazyListState,
-                colors = panelColors,
-                userScrollEnabled = userScrollEnabled
-            ) {
-                panel(true) {
+        val panelColors = with(MaterialTheme.colorScheme) {
+            PanelColors(
+                strokeColor = outline,
+                surface1 = secondary,
+                surface2 = primary,
+                surface3 = tertiary
+            )
+        }
+        PanelList(
+            contentPadding = if (userScrollEnabled) PaddingValues(0f.dp) else paddingValues,
+            state = lazyListState,
+            colors = panelColors,
+            userScrollEnabled = userScrollEnabled
+        ) {
+            panel(true) {
+                Box(Modifier.statusBarsPadding()) {
                     ImageCarousel(
                         images = images,
                         lazyListState = lazyListState,
@@ -155,15 +158,23 @@ internal fun DetailsScreen(
                         }
                     }
                 }
-                panelSeparator { _, lowerColor, strokeColor, flipped ->
-                    ComicListSeparator(
-                        upperColor = Color.Transparent,
-                        lowerColor = lowerColor,
-                        strokeColor = strokeColor,
-                        flipped = flipped
-                    )
-                }
-                content(lazyListState)
+            }
+            panelSeparator { _, lowerColor, strokeColor, flipped ->
+                ComicListSeparator(
+                    upperColor = Color.Transparent,
+                    lowerColor = lowerColor,
+                    strokeColor = strokeColor,
+                    flipped = flipped
+                )
+            }
+            content(lazyListState)
+            panelSeparator { upperColor, _, _, _ ->
+                Box(
+                    modifier = Modifier
+                        .background(upperColor)
+                        .fillMaxWidth()
+                        .navigationBarsPadding()
+                )
             }
         }
     }
@@ -195,19 +206,6 @@ internal fun Info(
             modifier = Modifier.clickable(onItemClicked != null) { onItemClicked?.invoke() })
     }
 }
-
-//@Composable
-//internal fun Info(
-//    name: String, content: AnnotatedString, onItemClicked: (() -> Unit)? = null
-//) {
-//    Row(Modifier.fillMaxWidth()) {
-//        Text("$name: ", style = MaterialTheme.typography.titleLarge)
-//        Text(content,
-//            style = MaterialTheme.typography.titleLarge,
-//            modifier = Modifier.clickable(onItemClicked != null) { onItemClicked?.invoke() })
-//    }
-//}
-
 
 @Preview
 @Composable
