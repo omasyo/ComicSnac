@@ -33,15 +33,15 @@ internal class DefaultSearchRepository @Inject constructor(
             ) {
                 CustomPagingSource(
                     provider = { page ->
-//                        if (page < 1) {
-                        networkSource.getSearchResults(
-                            apiKey,
-                            query,
-                            filter.joinToString(",") { it.format },
-                            PageSize,
-                            PageSize * page
-                        ).getOrThrow().results
-//                        } else emptyList() //TODO: Bug in comicvine search api. Workaround to get just the first page
+                        if (page < 1) {
+                            networkSource.getSearchResults(
+                                apiKey,
+                                query,
+                                filter.joinToString(",") { it.format },
+                                PageSize,
+                                PageSize * page
+                            ).getOrThrow().results
+                        } else emptyList() //TODO: Bug in comicvine search api. Workaround to get just the first page
                     },
                     mapper = List<SearchApiModel>::toSearchModels
                 )
@@ -49,7 +49,7 @@ internal class DefaultSearchRepository @Inject constructor(
         }.flowOn(dispatcher)
 
     companion object {
-        private const val PageSize = 10
+        private const val PageSize = 25
 
         private val pagingConfig = PagingConfig(
             pageSize = PageSize, enablePlaceholders = false

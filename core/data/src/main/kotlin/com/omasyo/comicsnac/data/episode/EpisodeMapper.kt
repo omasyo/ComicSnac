@@ -9,7 +9,7 @@ import com.omasyo.comicsnac.network.episode.models.EpisodeDetailsApiModel
 import com.omasyo.comicsnac.network.episode.models.EpisodeListApiModel
 
 fun EpisodeApiModel.toEpisodeBasic() =
-    EpisodeBasic(apiDetailUrl = apiDetailUrl, id = id, name = name)
+    EpisodeBasic(apiDetailUrl = apiDetailUrl, id = id, name = name ?: "")
 
 fun List<EpisodeListApiModel>.toEpisodes() = map { apiModel -> apiModel.toEpisode() }
 
@@ -19,7 +19,7 @@ fun EpisodeListApiModel.toEpisode() =
         deck = deck ?: "",
         id = id,
         imageUrl = image.smallUrl,
-        name = name,
+        name = name ?: "",
         seriesName = series.name
     )
 
@@ -34,7 +34,7 @@ fun EpisodeDetailsApiModel.toEpisodeDetails() =
         id = id,
         imageUrl = image.smallUrl,
         locationsId = locationCredits.map { it.id },
-        name = name,
+        name = name ?: "",
         objectsId = objectCredits.map { it.id },
         series = series.toSeriesBasic(),
         siteDetailUrl = siteDetailUrl,

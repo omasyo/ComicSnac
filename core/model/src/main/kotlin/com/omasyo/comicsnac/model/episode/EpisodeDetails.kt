@@ -4,7 +4,7 @@ import com.omasyo.comicsnac.model.series.SeriesBasic
 import java.time.LocalDate
 
 data class EpisodeDetails(
-    val airDate: LocalDate,
+    val airDate: LocalDate?,
     val apiDetailUrl: String,
     val charactersId: List<Int>,
     val deck: String,

@@ -12,6 +12,6 @@ data class EpisodeListApiModel(
     @SerialName("deck") val deck: String?,
     @SerialName("id") val id: Int,
     @SerialName("image") val image: ImageApiModel,
-    @SerialName("name") val name: String,
+    @SerialName("name") val name: String?,
     @SerialName("series") val series: SeriesApiModel
 )

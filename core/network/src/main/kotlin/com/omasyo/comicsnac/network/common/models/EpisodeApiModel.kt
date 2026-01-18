@@ -9,5 +9,5 @@ data class EpisodeApiModel(
     @SerialName("api_detail_url") val apiDetailUrl: String,
     @SerialName("episode_number") val episodeNumber: String,
     @SerialName("id") val id: Int,
-    @SerialName("name") val name: String
+    @SerialName("name") val name: String?,
 )

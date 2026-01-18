@@ -124,10 +124,12 @@ internal fun EpisodeDetailsScreen(
                                 .padding(horizontal = 16f.dp, vertical = 4f.dp),
                             verticalArrangement = Arrangement.spacedBy(4f.dp)
                         ) {
-                            Info(
-                                name = stringResource(R.string.air_date),
-                                content = airDate.formatDate()
-                            )
+                            airDate?.let {
+                                Info(
+                                    name = stringResource(R.string.air_date),
+                                    content = it.formatDate()
+                                )
+                            }
                             Info(
                                 name = stringResource(CommonString.series),
                                 content = series.name
