@@ -2,10 +2,19 @@ package com.omasyo.comicsnac.model.search
 
 enum class SearchType(val format: String) {
     Character("character"),
+    Team("team"),
+    Publisher("publisher"),
     Concept("concept"),
-    Object("object"),
     Location("location"),
+    Object("object"),
+    Person("person"),
+    Volume("volume"),
     Issue("issue"),
     StoryArc("story_arc"),
-    Volume("volume")
 }
+
+val SearchType.label
+    get() = when (this) {
+        SearchType.StoryArc -> "Story Arc"
+        else -> name
+    }

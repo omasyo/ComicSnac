@@ -52,6 +52,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.omasyo.comicsnac.model.character.Character
 import com.omasyo.comicsnac.model.search.SearchModel
 import com.omasyo.comicsnac.model.search.SearchType
+import com.omasyo.comicsnac.model.search.label
 import com.omasyo.comicsnac.ui.components.TextField
 import com.omasyo.comicsnac.ui.components.placeholders.ErrorPlaceholder
 import com.omasyo.comicsnac.ui.components.placeholders.LoadingPlaceholder
@@ -93,7 +94,7 @@ fun SearchScreen(
             ) {
                 SearchType.entries.forEach { type ->
                     SearchFilter(
-                        name = type.name,
+                        name = type.label,
                         enabled = filter.contains(type),
                         onClick = { onClickFilter(type) },
                         onLongClick = { onLongClickFilter(type) },
